@@ -68,6 +68,95 @@ git commit -m "update"
 git push
 ```
 
-## Tambah Menu Baru
+## Tambah Menu Baru (Manual)
 
-Lihat komentar di dalam `index.html` (sebelum closing `</div>` product-grid) untuk panduan lengkap menambah produk baru.
+Website ini **hardcoded** — satu file `index.html`, tidak ada database atau CMS. Untuk menambah menu baru, edit langsung file `index.html` dan push ke GitHub.
+
+### Langkah 1: Siapkan Foto Produk
+
+- Format: `.webp` (direkomendasikan) atau `.jpg`
+- Ukuran minimal: lebar 600px, rasio ~5:3 (landscape)
+- Kompres agar ringan (target < 100KB per foto)
+- Simpan di folder: `assets/`
+- Contoh: `assets/kue-coklat.webp`
+
+### Langkah 2: Tambah Card Produk di HTML
+
+Buka `index.html`, cari bagian `<div class="product-grid">`. Copy-paste blok di bawah ini, tempatkan **sebelum komentar template**:
+
+```html
+<div class="product-card fade-up">
+  <div class="product-img">
+    <span class="product-tag">KATEGORI</span>
+    <div class="product-photo-wrap">
+      <img src="assets/nama-foto.webp"
+           alt="Nama Produk"
+           class="product-photo">
+    </div>
+  </div>
+  <div class="product-info">
+    <h3 class="product-name">Nama Produk</h3>
+    <p class="product-desc">Deskripsi singkat produk.</p>
+    <button class="add-to-cart-btn" onclick="addToCart('Nama Produk', false, this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+  </div>
+</div>
+```
+
+Ganti:
+- `KATEGORI` → "Brownies", "Cookies", atau kategori baru
+- `assets/nama-foto.webp` → path foto yang sudah disimpan
+- `Nama Produk` → nama produk (muncul di card dan keranjang)
+- `Deskripsi singkat produk.` → deskripsi produk
+- `addToCart('Nama Produk', false, this)` → nama di parameter harus sama dengan di `.product-name`
+
+### Langkah 3 (Opsional): Produk dengan Beberapa Ukuran
+
+Jika produk punya beberapa ukuran seperti Fudgy Brownies:
+
+1. Siapkan foto per ukuran di `assets/` (misal `brownies-large.webp`, `brownies-medium.webp`, `brownies-small.webp`)
+
+2. Tambahkan selector di dalam `<div class="product-info">`:
+```html
+<div class="size-selector">
+  <button class="size-btn active" onclick="changeBrownieSize('large', this)">Large</button>
+  <button class="size-btn" onclick="changeBrownieSize('medium', this)">Medium</button>
+  <button class="size-btn" onclick="changeBrownieSize('small', this)">Small</button>
+</div>
+```
+
+3. Tambahkan entry di object `browniesPhotos` di bagian `<script>`:
+```javascript
+const browniesPhotos = {
+  large:  'assets/brownies-large.webp',
+  medium: 'assets/brownies-medium.webp',
+  small:  'assets/brownies-small.webp',
+  // tambah ukuran baru di sini
+};
+```
+
+4. Ubah parameter `addToCart` menjadi `true`:
+```html
+<button class="add-to-cart-btn" onclick="addToCart('Nama Produk', true, this)">
+```
+
+### Langkah 4: Push ke GitHub
+
+```bash
+cd ~/sketches/hen-tian-website
+git add -A
+git commit -m "tambah menu: Nama Produk"
+git push
+```
+
+Website otomatis update dalam 1-2 menit di [hen-tian.github.io](https://hen-tian.github.io/).
+
+---
+
+### Tips
+
+- **Hapus produk:** tinggal hapus blok `<div class="product-card">...</div>` yang tidak dipakai
+- **Urutan produk:** card paling atas di HTML = tampil paling kiri di website
+- **Ganti foto:** replace file di `assets/` dengan nama yang sama, push ulang
+- **Edit deskripsi:** ubah teks di `<p class="product-desc">` lalu push
