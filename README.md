@@ -20,11 +20,13 @@ Website landing page untuk HEN TIÁN, brand artisan brownies dan cookies premium
 - Gradient background dengan dekorasi radial
 
 ### Produk
-- **Fudgy Brownies** — 3 ukuran (Large, Medium, Small) dengan interactive size selector yang mengganti foto sesuai ukuran
-- **Monster Cookie** — chunky cookies dengan coklat, oat, dan M&M
-- **Matcha Cookie** — cookies matcha premium
-- **Classic Cookie** — chocolate chip cookies klasik
+- **Fudgy Brownies** — 3 ukuran (Large Rp 35.000, Medium Rp 20.000, Small Rp 5.000) dengan interactive size selector yang mengganti foto dan harga sesuai ukuran
+- **Monster Cookie** — chunky cookies (isi 3 pcs, Rp 20.000)
+- **Matcha Cookie** — cookies matcha premium (isi 4 pcs, Rp 20.000)
+- **Classic Cookie** — chocolate chip cookies klasik (isi 4 pcs, Rp 20.000)
+- **Paket Bundling** — mix 3 cookies: 1 Classic, 1 Matcha, 1 Monster (Rp 20.000)
 - Add to cart button dengan animasi checkmark
+- Catatan: harga dapat berubah sewaktu-waktu mengikuti harga bahan baku
 
 ### Shopping Cart
 - Floating cart badge di pojok kanan bawah
@@ -32,12 +34,20 @@ Website landing page untuk HEN TIÁN, brand artisan brownies dan cookies premium
 - Tambah/kurang jumlah item (qty +/−)
 - Hapus item dari keranjang
 - Counter badge dengan animasi
+- Harga per item dan total harga ditampilkan di drawer
 - Persist di localStorage (tidak hilang saat refresh)
 
 ### Order via WhatsApp
-- Auto-compose pesan dari isi keranjang
+- Auto-compose pesan dari isi keranjang (termasuk harga per item dan total)
 - Redirect langsung ke WhatsApp (`wa.me/6287876441888`)
-- Format pesan otomatis: "Kak aku mau pesan [produk] [ukuran] [jumlah]"
+- Format pesan otomatis:
+  ```
+  Kak aku mau pesan:
+  - Fudgy Brownies Large x2 (Rp 70.000)
+  - Matcha Cookie x1 (Rp 20.000)
+  
+  Total: Rp 90.000
+  ```
 
 ### About Section
 - 3 stat cards: Fresh, Premium, Artisan
