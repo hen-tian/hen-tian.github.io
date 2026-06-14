@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEN TIÁN — Brownies & Cookies Artisan</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: #fafaf8;
+    color: #2f2f2f;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 0 40px; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(250,250,248,0.85);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    transition: background 0.3s;
+  }
+  .nav-logo {
+    font-family: 'Noto Serif', serif;
+    font-weight: 600; font-size: 18px;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: #2a3a32; text-decoration: none;
+  }
+  .nav-logo .accent { color: #5a7a6a; }
+  .nav-links { display: flex; align-items: center; gap: 32px; }
+  .nav-links a {
+    font-size: 12px; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase; color: #6b6b6b; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: #5a7a6a; }
+  .nav-order {
+    background: #2a3a32; color: #fff !important;
+    padding: 10px 24px; border-radius: 100px;
+    font-size: 11px !important; font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .nav-order:hover { background: #5a7a6a; transform: translateY(-1px); }
+
+  /* Mobile nav toggle */
+  .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-toggle span { display: block; width: 20px; height: 2px; background: #2a3a32; margin: 5px 0; transition: 0.3s; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    background: linear-gradient(175deg, #f0f4f2 0%, #fafaf8 50%, #f5f0eb 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(90,122,106,0.06) 0%, transparent 70%);
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -150px; left: -150px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(160,128,96,0.05) 0%, transparent 70%);
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 700px; }
+  .hero-badge {
+    display: inline-block;
+    font-size: 10px; font-weight: 600; letter-spacing: 4px;
+    text-transform: uppercase; color: #8aa898;
+    border: 1px solid #c8d8d0; border-radius: 100px;
+    padding: 8px 20px; margin-bottom: 32px;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif', serif;
+    font-weight: 600; font-size: clamp(36px, 6vw, 64px);
+    letter-spacing: 4px; text-transform: uppercase;
+    color: #2a3a32; line-height: 1.15;
+    margin-bottom: 24px;
+  }
+  .hero h1 .accent { color: #5a7a6a; }
+  .hero-logo {
+    max-width: 520px;
+    width: 85%;
+    height: auto;
+    margin-bottom: 24px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero p {
+    font-size: 15px; font-weight: 400; line-height: 1.8;
+    color: #7a7a7a; max-width: 500px; margin: 0 auto 40px;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #2a3a32; color: #fff;
+    padding: 16px 40px; border-radius: 100px;
+    font-size: 12px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(42,58,50,0.15);
+  }
+  .hero-cta:hover { background: #5a7a6a; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(90,122,106,0.2); }
+  .hero-cta svg { width: 16px; height: 16px; }
+
+  /* ===== SECTION COMMON ===== */
+  .section { padding: 100px 24px; }
+  .section-header { text-align: center; margin-bottom: 60px; }
+  .section-tag {
+    font-size: 10px; font-weight: 600; letter-spacing: 4px;
+    text-transform: uppercase; color: #8aa898; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Noto Serif', serif;
+    font-weight: 600; font-size: clamp(24px, 4vw, 36px);
+    letter-spacing: 2px; color: #2a3a32;
+    margin-bottom: 16px;
+  }
+  .section-desc {
+    font-size: 14px; color: #8a8a8a; max-width: 480px;
+    margin: 0 auto; line-height: 1.7;
+  }
+  .cart-hint {
+    font-size: 12px; color: #aaa; margin-top: 14px;
+    letter-spacing: 0.5px;
+  }
+  .cart-hint-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 20px; height: 20px;
+    background: #2a3a32; color: #fff;
+    border-radius: 50%; font-size: 13px; font-weight: 700;
+    vertical-align: middle; line-height: 1;
+  }
+
+  /* ===== PRODUCTS ===== */
+  .products { background: #fafaf8; }
+  .product-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+  }
+  .product-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+  }
+  .product-img {
+    height: 240px;
+    background: linear-gradient(135deg, #e8ede9 0%, #f0ebe5 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-photo {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+  }
+  .product-photo-wrap {
+    width: 100%; height: 100%;
+    position: absolute; top: 0; left: 0;
+  }
+  .product-img .product-tag {
+    position: absolute; top: 16px; left: 16px; z-index: 2;
+    background: rgba(42,58,50,0.85); color: #fff;
+    font-size: 9px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; padding: 6px 14px;
+    border-radius: 100px;
+  }
+  .product-info { padding: 28px; }
+  .product-name {
+    font-family: 'Noto Serif', serif;
+    font-weight: 600; font-size: 20px;
+    letter-spacing: 1px; color: #2a3a32;
+    margin-bottom: 8px;
+  }
+  .product-desc {
+    font-size: 13px; color: #999; line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  /* ===== ADD TO CART BUTTON ===== */
+  .product-card { position: relative; }
+  .add-to-cart-btn {
+    position: absolute; top: 16px; right: 16px;
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.92); color: #2a3a32;
+    border: 1.5px solid rgba(0,0,0,0.08);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(6px);
+    z-index: 2;
+  }
+  .add-to-cart-btn:hover { background: #5a7a6a; color: #fff; transform: scale(1.1); }
+  .add-to-cart-btn svg { width: 18px; height: 18px; }
+  .add-to-cart-btn.added {
+    background: #5a7a6a;
+    animation: cartPop 0.3s ease;
+  }
+  @keyframes cartPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+  /* ===== BROWNIES SIZE SELECTOR ===== */
+  .size-selector {
+    display: flex; gap: 8px; margin-bottom: 12px;
+  }
+  .size-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase; color: #999;
+    background: #f7f7f5;
+    padding: 8px 20px; border-radius: 100px;
+    border: 1.5px solid #e8e8e6;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .size-btn:hover {
+    color: #5a7a6a; border-color: #c8d8d0;
+    background: #f0f4f2;
+  }
+  .size-btn.active {
+    color: #fff;
+    background: #2a3a32;
+    border-color: #2a3a32;
+    box-shadow: 0 2px 10px rgba(42,58,50,0.2);
+  }
+
+  /* ===== FLOATING CART BADGE ===== */
+  .cart-float {
+    position: fixed; bottom: 28px; right: 28px; z-index: 200;
+    width: 56px; height: 56px;
+    background: #2a3a32; color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(42,58,50,0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+  .cart-float:hover { background: #5a7a6a; transform: scale(1.08); }
+  .cart-float svg { width: 24px; height: 24px; }
+  .cart-badge {
+    position: absolute; top: -4px; right: -4px;
+    background: #e74c3c; color: #fff;
+    font-size: 11px; font-weight: 700;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid #fafaf8;
+    transition: transform 0.3s ease;
+  }
+  .cart-badge.hidden { display: none; }
+  .cart-badge.pop { animation: cartPop 0.3s ease; }
+
+  /* ===== CART DRAWER ===== */
+  .cart-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 300;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .cart-overlay.open { opacity: 1; visibility: visible; }
+
+  .cart-drawer {
+    position: fixed; top: 0; right: -400px; bottom: 0;
+    width: 380px; max-width: 90vw;
+    background: #fff;
+    z-index: 301;
+    display: flex; flex-direction: column;
+    box-shadow: -4px 0 30px rgba(0,0,0,0.1);
+    transition: right 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .cart-drawer.open { right: 0; }
+
+  .cart-header {
+    padding: 24px 28px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cart-header h3 {
+    font-family: 'Noto Serif', serif;
+    font-size: 18px; font-weight: 600;
+    letter-spacing: 1px; color: #2a3a32;
+  }
+  .cart-close {
+    background: none; border: none; cursor: pointer;
+    color: #999; padding: 4px;
+    transition: color 0.2s;
+  }
+  .cart-close:hover { color: #2a3a32; }
+  .cart-close svg { width: 20px; height: 20px; }
+
+  .cart-body {
+    flex: 1; overflow-y: auto; padding: 20px 28px;
+  }
+  .cart-empty {
+    text-align: center; padding: 60px 20px;
+    color: #bbb; font-size: 14px;
+  }
+  .cart-empty svg { width: 48px; height: 48px; margin-bottom: 16px; opacity: 0.3; }
+
+  .cart-item {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .cart-item:last-child { border-bottom: none; }
+  .cart-item-info { flex: 1; }
+  .cart-item-name {
+    font-family: 'Noto Serif', serif;
+    font-size: 14px; font-weight: 600;
+    color: #2a3a32; margin-bottom: 2px;
+  }
+  .cart-item-size {
+    font-size: 11px; color: #999;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .cart-item-qty {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .qty-btn {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid #e0e0e0;
+    background: #fff;
+    font-size: 16px; font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .qty-btn:hover { border-color: #5a7a6a; color: #5a7a6a; }
+  .qty-num {
+    font-size: 14px; font-weight: 600;
+    color: #2a3a32; min-width: 20px; text-align: center;
+  }
+  .cart-item-remove {
+    background: none; border: none; cursor: pointer;
+    color: #ccc; padding: 4px;
+    transition: color 0.2s;
+  }
+  .cart-item-remove:hover { color: #e74c3c; }
+  .cart-item-remove svg { width: 16px; height: 16px; }
+
+  .cart-footer {
+    padding: 20px 28px 28px;
+    border-top: 1px solid #f0f0f0;
+  }
+  .cart-total {
+    display: flex; justify-content: space-between;
+    margin-bottom: 16px;
+    font-size: 13px; color: #999;
+  }
+  .cart-total span:last-child {
+    font-weight: 600; color: #2a3a32;
+  }
+  .cart-wa-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%;
+    background: #25D366; color: #fff;
+    border: none; border-radius: 12px;
+    padding: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 4px 15px rgba(37,211,102,0.3);
+  }
+  .cart-wa-btn:hover { background: #20bd5a; transform: translateY(-1px); }
+  .cart-wa-btn:disabled { background: #ccc; box-shadow: none; cursor: not-allowed; transform: none; }
+  .cart-wa-btn svg { width: 20px; height: 20px; }
+
+  /* ===== ABOUT ===== */
+  .about { background: #2a3a32; color: #e8ede9; }
+  .about .section-tag { color: #8aa898; }
+  .about .section-title { color: #e8ede9; }
+  .about .section-desc { color: #9ab0a4; }
+  .about-grid {
+    max-width: 900px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 40px; text-align: center;
+  }
+  .about-stat .stat-icon {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(138,168,152,0.15);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px; font-size: 24px;
+  }
+  .about-stat .stat-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: #8aa898;
+    margin-bottom: 6px;
+  }
+  .about-stat .stat-text {
+    font-size: 13px; color: #9ab0a4; line-height: 1.6;
+  }
+
+  /* ===== ORDER ===== */
+  .order { background: linear-gradient(175deg, #f0f4f2 0%, #fafaf8 100%); }
+  .order-cards {
+    max-width: 700px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .order-card {
+    background: #fff;
+    border-radius: 16px; padding: 40px 32px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none; color: #2f2f2f;
+    display: block;
+  }
+  .order-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+  }
+  .order-icon {
+    width: 64px; height: 64px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .order-icon svg {
+    width: 28px; height: 28px;
+  }
+  .order-card.wa .order-icon { background: #e8f5e9; color: #25D366; }
+  .order-card.ig .order-icon { background: #fce4ec; color: #E4405F; }
+  .order-card .order-label {
+    font-family: 'Noto Serif', serif;
+    font-weight: 600; font-size: 18px;
+    letter-spacing: 1px; margin-bottom: 8px;
+  }
+  .order-card .order-detail {
+    font-size: 13px; color: #999; line-height: 1.5;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: #2a3a32;
+    padding: 40px 24px;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Noto Serif', serif;
+    font-weight: 600; font-size: 16px;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: #e8ede9; margin-bottom: 12px;
+  }
+  .footer-logo .accent { color: #8aa898; }
+  .footer p {
+    font-size: 12px; color: #6a8a7a; line-height: 1.8;
+  }
+  .footer .footer-divider {
+    width: 40px; height: 1px; background: #4a6a5a;
+    margin: 16px auto;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .navbar { padding: 0 20px; }
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: absolute; top: 64px; left: 0; right: 0;
+      background: rgba(250,250,248,0.98);
+      backdrop-filter: blur(12px);
+      padding: 24px; gap: 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .section { padding: 60px 20px; }
+    .hero { padding: 100px 20px 60px; min-height: 100vh; min-height: 100svh; }
+    .product-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    .order-cards { grid-template-columns: 1fr; }
+    .size-selector { justify-content: center; }
+    .cart-float { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+  }
+
+  /* ===== ANIMATIONS ===== */
+  .fade-up {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="#" class="nav-logo">HEN <span class="accent">TIÁN</span></a>
+  <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-links">
+    <a href="#produk">Produk</a>
+    <a href="#tentang">Tentang</a>
+    <a href="#pesan" class="nav-order">Pesan</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Preorder Only · Artisan Brownies & Cookies</div>
+    <img src="hen-tian-logo.png" alt="HEN TIÁN" class="hero-logo">
+    <p>Brownies dan cookies premium, dibuat dengan bahan pilihan dan sentuhan artisan untuk setiap momen spesial Anda.</p>
+    <a href="#produk" class="hero-cta">
+      Lihat Menu
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section products" id="produk">
+  <div class="section-header fade-up">
+    <p class="section-tag">Produk Kami</p>
+    <h2 class="section-title">Dibuat dengan Cinta</h2>
+    <p class="section-desc">Setiap produk dibuat fresh menggunakan bahan berkualitas tinggi, tanpa pengawet.</p>
+    <p class="cart-hint">Klik <span class="cart-hint-icon">+</span> untuk menambahkan ke keranjang</p>
+  </div>
+
+  <div class="product-grid">
+
+    <!-- Fudgy Brownies -->
+    <div class="product-card fade-up">
+      <div class="product-img" id="brownies-img">
+        <span class="product-tag">Brownies</span>
+        <div class="product-photo-wrap">
+          <img src="assets/brownies-large.webp" alt="Fudgy Brownies Large" class="product-photo" id="brownies-photo">
+        </div>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Fudgy Brownies</h3>
+        <p class="product-desc">Brownies fudgy premium dengan tekstur rich, moist, dan deeply chocolatey — favorit sepanjang masa.</p>
+        <div class="size-selector">
+          <button class="size-btn active" onclick="changeBrownieSize('large', this)">Large</button>
+          <button class="size-btn" onclick="changeBrownieSize('medium', this)">Medium</button>
+          <button class="size-btn" onclick="changeBrownieSize('small', this)">Small</button>
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart('Fudgy Brownies', true, this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Cookies Monster -->
+    <div class="product-card fade-up">
+      <div class="product-img">
+        <span class="product-tag">Cookies</span>
+        <div class="product-photo-wrap">
+          <img src="assets/monster-cookie.webp" alt="Monster Cookie" class="product-photo">
+        </div>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Monster Cookie</h3>
+        <p class="product-desc">Cookies chunky dengan kombinasi coklat, oat, dan M&M — sebesar monster!</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Monster Cookie', false, this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Cookies Matcha -->
+    <div class="product-card fade-up">
+      <div class="product-img">
+        <span class="product-tag">Cookies</span>
+        <div class="product-photo-wrap">
+          <img src="assets/matcha-cookie.webp" alt="Matcha Cookie" class="product-photo">
+        </div>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Matcha Cookie</h3>
+        <p class="product-desc">Cookies matcha premium dengan aroma teh hijau yang harum dan lembut.</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Matcha Cookie', false, this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Cookies Classic -->
+    <div class="product-card fade-up">
+      <div class="product-img">
+        <span class="product-tag">Cookies</span>
+        <div class="product-photo-wrap">
+          <img src="assets/classic-cookie.webp" alt="Classic Cookie" class="product-photo">
+        </div>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Classic Cookie</h3>
+        <p class="product-desc">Chocolate chip cookies klasik — renyah di luar, chewy di dalam.</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Classic Cookie', false, this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!--
+    ========================================================
+    CARA MENAMBAH MENU BARU
+    ========================================================
+
+    1. Siapkan foto produk:
+       - Format: .webp (direkomendasikan) atau .jpg
+       - Ukuran: minimal lebar 600px, rasio ~5:3 (landscape)
+       - Simpan di folder: assets/
+       - Kompres agar ringan (target < 100KB per foto)
+       - Contoh: assets/nama-produk.webp
+
+    2. Copy-paste blok di bawah ini, tempatkan sebelum komentar ini:
+
+    <div class="product-card fade-up">
+      <div class="product-img">
+        <span class="product-tag">KATEGORI</span>
+        <div class="product-photo-wrap">
+          <img src="assets/nama-foto.webp"
+               alt="Nama Produk"
+               class="product-photo">
+        </div>
+      </div>
+      <div class="product-info">
+        <h3 class="product-name">Nama Produk</h3>
+        <p class="product-desc">Deskripsi singkat produk.</p>
+        <button class="add-to-cart-btn" onclick="addToCart('Nama Produk', false, this)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>
+    </div>
+
+    3. Ganti yang perlu diubah:
+       - KATEGORI        → "Brownies" atau "Cookies" (atau kategori baru)
+       - assets/nama-foto.webp  → path foto yang sudah disimpan
+       - Nama Produk      → nama produk yang ditampilkan
+       - Deskripsi         → deskripsi singkat produk
+       - addToCart('Nama Produk', false, this)  → nama di parameter harus sama
+
+    4. Jika produk punya beberapa ukuran (seperti Fudgy Brownies):
+       - Tambahkan tombol size-selector di dalam <div class="product-info">
+       - Tambahkan foto per ukuran di folder assets/
+       - Tambahkan entry di object browniesPhotos di bagian <script>
+       - Pakai addToCart('Nama Produk', true) (parameter kedua = true)
+
+    5. Push ke GitHub, otomatis live di GitHub Pages.
+    ========================================================
+    -->
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about" id="tentang">
+  <div class="section-header fade-up">
+    <p class="section-tag">Tentang Kami</p>
+    <h2 class="section-title">HEN TIÁN</h2>
+    <p class="section-desc">Brand artisan yang menghadirkan brownies dan cookies premium dengan konsistensi rasa dan kualitas terbaik.</p>
+  </div>
+
+  <div class="about-grid fade-up">
+    <div class="about-stat">
+      <div class="stat-icon">🍫</div>
+      <p class="stat-label">Fresh</p>
+      <p class="stat-text">Dibuat fresh saat dipesan, tanpa pengawet</p>
+    </div>
+    <div class="about-stat">
+      <div class="stat-icon">✨</div>
+      <p class="stat-label">Premium</p>
+      <p class="stat-text">Bahan pilihan berkualitas tinggi</p>
+    </div>
+    <div class="about-stat">
+      <div class="stat-icon">💝</div>
+      <p class="stat-label">Artisan</p>
+      <p class="stat-text">Dibuat dengan resep dan sentuhan khusus</p>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section class="section order" id="pesan">
+  <div class="section-header fade-up">
+    <p class="section-tag">Pesan Sekarang</p>
+    <h2 class="section-title">Cara Pemesanan</h2>
+    <p class="section-desc">Semua produk dibuat secara preorder. Hubungi kami langsung untuk konsultasi menu, jumlah, dan pengiriman.</p>
+  </div>
+
+  <div class="order-cards fade-up">
+    <a href="https://wa.me/6287876441888?text=Halo%20kak%2C%20mau%20pesan%20HEN%20TI%C3%81N" class="order-card wa">
+      <div class="order-icon"><svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+      <p class="order-label">WhatsApp</p>
+      <p class="order-detail">Chat langsung untuk pesan<br>Jam operasional 08.00–17.00 WIB</p>
+    </a>
+    <a href="https://www.instagram.com/hen.tian/" class="order-card ig" target="_blank">
+      <div class="order-icon"><svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+      <p class="order-label">Instagram</p>
+      <p class="order-detail">@hen.tian<br>Lihat produk terbaru kami</p>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="footer-logo">HEN <span class="accent">TIÁN</span></p>
+  <div class="footer-divider"></div>
+  <p>Brownies & Cookies Artisan</p>
+  <p style="margin-top: 4px;">© 2025–2026 HEN TIÁN · Dibuat dengan ❤️</p>
+</footer>
+
+<!-- FLOATING CART BUTTON -->
+<button class="cart-float" onclick="toggleCart()" aria-label="Keranjang">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+  <span class="cart-badge hidden" id="cart-badge">0</span>
+</button>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+<!-- CART DRAWER -->
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-header">
+    <h3>Keranjang</h3>
+    <button class="cart-close" onclick="toggleCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="cart-body" id="cart-body">
+    <div class="cart-empty" id="cart-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+      <p>Keranjang masih kosong</p>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total item</span>
+      <span id="cart-total-num">0</span>
+    </div>
+    <button class="cart-wa-btn" id="cart-wa-btn" onclick="orderViaWA()" disabled>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Pesan via WhatsApp
+    </button>
+  </div>
+</div>
+
+<!-- SCRIPTS -->
+<script>
+  // ===== SCROLL ANIMATION =====
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ===== BROWNIES SIZE SELECTOR =====
+  const browniesPhotos = {
+    large:  'assets/brownies-large.webp',
+    medium: 'assets/brownies-medium.webp',
+    small:  'assets/brownies-small.webp'
+  };
+  let currentBrownieSize = 'large';
+
+  function changeBrownieSize(size, btn) {
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentBrownieSize = size;
+
+    const photo = document.getElementById('brownies-photo');
+    photo.style.opacity = '0';
+
+    setTimeout(() => {
+      photo.src = browniesPhotos[size];
+      photo.alt = 'Fudgy Brownies ' + size.charAt(0).toUpperCase() + size.slice(1);
+      photo.onload = () => { photo.style.opacity = '1'; };
+    }, 200);
+  }
+
+  // ===== CART SYSTEM =====
+  let cart = JSON.parse(localStorage.getItem('hentian-cart') || '[]');
+
+  function saveCart() {
+    localStorage.setItem('hentian-cart', JSON.stringify(cart));
+  }
+
+  function addToCart(name, hasSize, btn) {
+    const size = hasSize ? currentBrownieSize : null;
+    const key = name + (size ? '-' + size : '');
+
+    const existing = cart.find(i => i.key === key);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ key, name, size, qty: 1 });
+    }
+
+    saveCart();
+    renderCart();
+    animateBadge();
+    flashButton(btn);
+  }
+
+  function removeFromCart(key) {
+    cart = cart.filter(i => i.key !== key);
+    saveCart();
+    renderCart();
+  }
+
+  function changeQty(key, delta) {
+    const item = cart.find(i => i.key === key);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) {
+      removeFromCart(key);
+      return;
+    }
+    saveCart();
+    renderCart();
+  }
+
+  function renderCart() {
+    const body = document.getElementById('cart-body');
+    const empty = document.getElementById('cart-empty');
+    const badge = document.getElementById('cart-badge');
+    const totalNum = document.getElementById('cart-total-num');
+    const waBtn = document.getElementById('cart-wa-btn');
+
+    const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+
+    // Badge
+    badge.textContent = totalQty;
+    badge.classList.toggle('hidden', totalQty === 0);
+    totalNum.textContent = totalQty;
+    waBtn.disabled = totalQty === 0;
+
+    // Clear items (keep empty message)
+    body.querySelectorAll('.cart-item').forEach(el => el.remove());
+    empty.style.display = cart.length === 0 ? 'block' : 'none';
+
+    // Render items
+    cart.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          ${item.size ? `<div class="cart-item-size">${item.size}</div>` : ''}
+        </div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeQty('${item.key}', -1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty('${item.key}', 1)">+</button>
+        </div>
+        <button class="cart-item-remove" onclick="removeFromCart('${item.key}')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14"/></svg>
+        </button>
+      `;
+      body.appendChild(div);
+    });
+  }
+
+  function toggleCart() {
+    const overlay = document.getElementById('cart-overlay');
+    const drawer = document.getElementById('cart-drawer');
+    const isOpen = drawer.classList.contains('open');
+
+    overlay.classList.toggle('open', !isOpen);
+    drawer.classList.toggle('open', !isOpen);
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  }
+
+  function animateBadge() {
+    const badge = document.getElementById('cart-badge');
+    badge.classList.remove('pop');
+    void badge.offsetWidth; // trigger reflow
+    badge.classList.add('pop');
+  }
+
+  function flashButton(btn) {
+    if (btn._flashTimer) clearTimeout(btn._flashTimer);
+    btn.classList.add('added');
+    const svg = btn.querySelector('svg');
+    const origPath = svg.querySelector('path').getAttribute('d');
+    svg.querySelector('path').setAttribute('d', 'M5 13l4 4L19 7');
+    btn._flashTimer = setTimeout(() => {
+      btn.classList.remove('added');
+      svg.querySelector('path').setAttribute('d', origPath);
+      btn._flashTimer = null;
+    }, 800);
+  }
+
+  function orderViaWA() {
+    if (cart.length === 0) return;
+
+    // Build message
+    const parts = cart.map(item => {
+      const sizeStr = item.size ? ' ' + item.size.charAt(0).toUpperCase() + item.size.slice(1) : '';
+      return item.name + sizeStr + ' ' + item.qty;
+    });
+
+    let msg = 'Kak aku mau pesan ';
+    if (parts.length === 1) {
+      msg += parts[0];
+    } else {
+      msg += parts.slice(0, -1).join(', ') + ' dan ' + parts[parts.length - 1];
+    }
+
+    const waUrl = 'https://wa.me/6287876441888?text=' + encodeURIComponent(msg);
+    window.open(waUrl, '_blank');
+  }
+
+  // Init
+  renderCart();
+</script>
+
+</body>
+</html>
